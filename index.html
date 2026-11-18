@@ -91,12 +91,10 @@ nav.main a.active{color:var(--azure-l);opacity:1}
 .geo .rays{transform-box:view-box;transform-origin:1150px 470px;animation:geoSpin 120s linear infinite}
 .geo .dash{animation:geoDash 30s linear infinite}
 .geo .dash2{animation:geoDash 45s linear infinite reverse}
-.geo .core{animation:geoGlow 6s ease-in-out infinite}
 .geo .float{animation:geoFloat 9s ease-in-out infinite}
 .geo .float2{animation:geoFloat 12s ease-in-out infinite reverse}
 @keyframes geoSpin{to{transform:rotate(360deg)}}
 @keyframes geoDash{to{stroke-dashoffset:-400}}
-@keyframes geoGlow{0%,100%{opacity:.9}50%{opacity:.6}}
 @keyframes geoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .hero .wrap>*{animation:heroIn 1s cubic-bezier(.2,.7,.2,1) both}
 .hero .wrap>*:nth-child(2){animation-delay:.12s}
@@ -516,8 +514,6 @@ function geo(){
     <pattern id="gdots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" fill="#cfe2ff"/></pattern>
     <radialGradient id="gdm" cx="${cx/1440}" cy="${cy/900}" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".6" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
     <mask id="gdmask"><rect width="1440" height="${cy}" fill="url(#gdm)"/></mask>
-    <radialGradient id="gcore"><stop offset="0" stop-color="#e6f0ff"/><stop offset=".45" stop-color="#93c0ff"/><stop offset="1" stop-color="#3d8bff"/></radialGradient>
-    <radialGradient id="ghalo"><stop offset="0" stop-color="#6ea6ff" stop-opacity=".45"/><stop offset="1" stop-color="#6ea6ff" stop-opacity="0"/></radialGradient>
     <linearGradient id="ghz" x1="0" x2="1"><stop offset="0" stop-color="#93c0ff" stop-opacity="0"/><stop offset=".55" stop-color="#93c0ff" stop-opacity=".5"/><stop offset=".8" stop-color="#cfe2ff" stop-opacity=".95"/><stop offset="1" stop-color="#93c0ff" stop-opacity=".4"/></linearGradient>
     <linearGradient id="gfl" x1="0" x2="1"><stop offset="0" stop-color="#000"/><stop offset=".45" stop-color="#555"/><stop offset=".75" stop-color="#fff"/></linearGradient>
     <mask id="gleft"><rect width="1440" height="900" fill="url(#gfl)"/></mask>
@@ -531,9 +527,6 @@ function geo(){
     <g clip-path="url(#gbelow)" stroke="#93c0ff" fill="none">${hz}${vt}</g>
   </g>
   <g clip-path="url(#gabove)">
-    <circle cx="${cx}" cy="${cy}" r="260" fill="url(#ghalo)"/>
-    <circle class="core" cx="${cx}" cy="${cy}" r="96" fill="url(#gcore)"/>
-    <circle cx="${cx}" cy="${cy}" r="96" fill="none" stroke="#e6f0ff" stroke-opacity=".6"/>
   </g>
   <g clip-path="url(#gbelow)" fill="#cfe2ff">
     <rect x="${cx-110}" y="${cy+12}" width="220" height="2.5" rx="1.2" opacity=".35"/>

@@ -362,6 +362,70 @@ footer p{font-size:.82rem;color:#3b404c}
   .post.feature .ph{min-height:220px}
   .band{padding:60px 0}
 }
+
+/* ===== AI assistant ===== */
+.ai-fab{position:fixed;right:22px;bottom:22px;z-index:80;display:flex;align-items:center;gap:10px;background:var(--azure);color:#fff;border:0;border-radius:40px;padding:13px 20px 13px 16px;font-weight:600;font-size:.88rem;cursor:pointer;box-shadow:0 12px 30px rgba(20,60,160,.45);transition:transform .25s,box-shadow .25s}
+.ai-fab:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(20,60,160,.55)}
+.ai-fab svg{width:22px;height:22px}
+.ai-fab .pulse{position:absolute;right:10px;top:8px;width:9px;height:9px;border-radius:50%;background:#7dffb2;box-shadow:0 0 0 0 rgba(125,255,178,.7);animation:aiP 2s infinite}
+@keyframes aiP{70%{box-shadow:0 0 0 8px rgba(125,255,178,0)}100%{box-shadow:0 0 0 0 rgba(125,255,178,0)}}
+body.ai-open .ai-fab{opacity:0;pointer-events:none;transform:scale(.9)}
+.ai-panel{padding:0!important;position:fixed;right:22px;bottom:22px;z-index:90;width:400px;max-width:calc(100vw - 24px);height:min(640px,calc(100vh - 44px));background:#101116;border:1px solid rgba(255,255,255,.09);border-radius:16px;box-shadow:0 30px 70px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(16px) scale(.98);transform-origin:bottom right;transition:.3s cubic-bezier(.2,.7,.2,1)}
+body.ai-open .ai-panel{opacity:1;visibility:visible;transform:none}
+.ai-head{display:flex;align-items:center;gap:12px;padding:16px 16px 14px;background:linear-gradient(135deg,#0a2463,#1f56c9);color:#fff}
+.ai-av{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none}
+.ai-av svg{width:24px;height:24px}
+.ai-head b{display:block;font-size:.95rem}
+.ai-head small{font-size:.72rem;opacity:.85;display:flex;align-items:center;gap:6px}
+.ai-head small i{width:7px;height:7px;border-radius:50%;background:#7dffb2;display:inline-block}
+.ai-head small.off i{background:#ffd27d}
+.ai-head .sp{flex:1}
+.ai-head button{background:rgba(255,255,255,.12);border:0;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.05rem;line-height:1}
+.ai-head button:hover{background:rgba(255,255,255,.24)}
+.ai-body{flex:1;overflow-y:auto;padding:18px 16px 8px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.ai-msg{max-width:88%;font-size:.88rem;line-height:1.55;padding:11px 14px;border-radius:14px;color:var(--txt);word-wrap:break-word}
+.ai-msg.bot{background:#1b1d24;border-top-left-radius:4px;align-self:flex-start}
+.ai-msg.me{background:var(--azure);color:#fff;border-top-right-radius:4px;align-self:flex-end}
+.ai-msg p+p,.ai-msg ul{margin-top:8px}
+.ai-msg ul{padding-left:18px}
+.ai-msg a{color:var(--azure-l);text-decoration:underline}
+.ai-msg.me a{color:#fff}
+.ai-msg b{color:#fff}
+.ai-typing{display:inline-flex;gap:4px;padding:4px 0}
+.ai-typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:aiT 1.2s infinite}
+.ai-typing span:nth-child(2){animation-delay:.15s}.ai-typing span:nth-child(3){animation-delay:.3s}
+@keyframes aiT{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.ai-chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}
+.ai-chips button{background:transparent;border:1px solid rgba(140,188,255,.4);color:var(--azure-l);border-radius:30px;padding:7px 12px;font-size:.78rem;cursor:pointer;transition:.2s}
+.ai-chips button:hover{background:rgba(61,139,255,.15);color:#fff}
+.ai-card{align-self:stretch;background:#fff;color:var(--dark-txt);border-radius:12px;padding:16px;font-size:.84rem}
+.ai-card h4{font-size:.95rem;margin-bottom:4px}
+.ai-card .sub{font-size:.76rem;color:var(--dark-muted);margin-bottom:12px}
+.ai-card label{display:block;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#4a5160;margin:10px 0 4px}
+.ai-card input,.ai-card select,.ai-card textarea{width:100%;padding:9px 10px;border:1px solid #cfd6e2;border-radius:6px;font-size:.86rem;background:#fff;color:var(--dark-txt)}
+.ai-card input:focus,.ai-card select:focus,.ai-card textarea:focus{outline:2px solid var(--azure);outline-offset:-1px;border-color:var(--azure)}
+.ai-card textarea{min-height:70px;resize:vertical}
+.ai-card .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ai-card .acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.ai-card .acts button{border-radius:30px;padding:9px 16px;font-size:.8rem;font-weight:600;cursor:pointer;border:1px solid var(--azure);background:var(--azure);color:#fff}
+.ai-card .acts button.ghost{background:transparent;color:var(--azure-d);border-color:#cfd6e2}
+.ai-card .err{color:#c0392b;font-size:.76rem;margin-top:8px;display:none}
+.ai-card .sum{background:#f3f6fb;border-radius:8px;padding:10px 12px;font-size:.8rem;white-space:pre-wrap;margin-top:10px;color:#2b3040}
+.ai-card.done{border-left:4px solid #2fae6b}
+.ai-foot{border-top:1px solid rgba(255,255,255,.07);padding:10px 12px 12px}
+.ai-form{display:flex;gap:8px;align-items:flex-end}
+.ai-form textarea{flex:1;resize:none;max-height:110px;min-height:42px;background:#1b1d24;border:1px solid rgba(255,255,255,.1);border-radius:12px;color:var(--txt);padding:11px 12px;font-size:.88rem;line-height:1.4}
+.ai-form textarea:focus{outline:none;border-color:var(--azure)}
+.ai-form button{width:42px;height:42px;border-radius:50%;border:0;background:var(--azure);color:#fff;cursor:pointer;flex:none;display:grid;place-items:center}
+.ai-form button:disabled{opacity:.4;cursor:default}
+.ai-form button svg{width:18px;height:18px}
+.ai-note{font-size:.66rem;color:#7b8292;margin-top:7px;text-align:center}
+@media (max-width:560px){
+  .ai-panel{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;height:100dvh;border-radius:0;border:0}
+  .ai-fab{right:16px;bottom:16px;padding:12px 16px 12px 13px}
+  .ai-fab span.t{display:none}
+}
+@media (prefers-reduced-motion:reduce){.ai-panel,.ai-fab{transition:none}.ai-fab .pulse,.ai-typing span{animation:none}}
 </style>
 </head>
 <body>
@@ -941,6 +1005,7 @@ function contact(){
     </div>
     <div class="cinfo rv">
       ${ph('contactSide')}<br><br>
+      <div class="blk" style="background:#eef4ff;padding:18px 18px 16px;border-left:3px solid var(--azure)"><h3>Prefer to chat?</h3><p style="margin-bottom:12px">Our AI assistant can answer questions and book a consultation for you.</p><a href="#" data-chat="consultation" class="btn solid" style="font-size:.8rem">Book via assistant</a> <a href="#" data-chat="" class="btn dark" style="font-size:.8rem">Ask a question</a></div>
       <div class="blk"><h3>Email</h3><p>hello@azurehorizon.com</p></div>
       <div class="blk"><h3>Phone</h3><p>+00 000 000 000</p></div>
       <div class="blk"><h3>Studio</h3><p>City, Country. Working with partners globally</p></div>
@@ -963,7 +1028,7 @@ function faq(){
   ${hero('faqHero','FAQ','Frequently asked questions about how we work, what we charge and what to expect.','Help')}
   <section><div class="wrap faqpage">
     <aside class="faqnav rv"><span class="kick">Topics</span>${FAQS.map((c,i)=>`<button data-faqjump="${i}">${c.g}</button>`).join('')}
-      <div class="ask"><h3>Still have a question?</h3><p>Talk to the people who'll work on your project.</p><a href="#contact" class="btn solid">Contact us</a></div></aside>
+      <div class="ask"><h3>Still have a question?</h3><p>Ask our AI assistant, or talk to the people who'll work on your project.</p><a href="#" data-chat="" class="btn solid">Ask the assistant</a> <a href="#contact" class="btn" style="margin-top:8px">Contact us</a></div></aside>
     <div>${FAQS.map((c,i)=>`<div class="fgroup" id="fg-${i}"><h2 class="rv">${c.g}</h2>${bar}
       <div class="faq rv">${c.q.map(([q,a])=>`<details ${n++===0?'open':''}><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div>`).join('')}</div>
   </div></section>
@@ -1054,6 +1119,271 @@ document.addEventListener('submit',e=>{
 window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('hashchange',render);
 buildNav(); render();
+</script>
+<script>
+/* ============================================================
+   AZURE HORIZON AI ASSISTANT
+   AI backends, tried in order:
+   1. claude.ai "sample" capability (when viewed as a claude.ai artifact)
+   2. AI_CONFIG.chatEndpoint, your own server (see api/worker.js)
+   3. Built-in quick answers (no AI, always available)
+   Leads (bookings, service requests, messages) go to
+   AI_CONFIG.leadEndpoint when it is set.
+   ============================================================ */
+const AI_CONFIG = {
+  chatEndpoint: "",   // e.g. "https://azure-horizon-ai.<you>.workers.dev/chat"
+  leadEndpoint: "",   // e.g. "https://azure-horizon-ai.<you>.workers.dev/lead"
+  email: "hello@azurehorizon.com",
+  phone: "+00 000 000 000"
+};
+
+(function(){
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ICON_BOT='<svg viewBox="0 0 48 48" fill="none"><path d="M13 28a11 11 0 0 1 22 0z" fill="#fff"/><path d="M4 31h40" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M9 36.5c5-2.6 10-2.6 15 0s10 2.6 15 0" stroke="#bcd6ff" stroke-width="2.4" stroke-linecap="round"/><g stroke="#bcd6ff" stroke-width="2.4" stroke-linecap="round"><path d="M24 8v6M12 13l4 4M36 13l-4 4"/></g></svg>';
+const ICON_SEND='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+/* ---------- Knowledge given to the AI ---------- */
+function knowledge(){
+  const svc = SERVICES.map(s=>`- ${s.name} (page #${s.id}): ${s.short} Deliverables: ${s.deliver.join('; ')}.`).join('\n');
+  const faq = FAQS.flatMap(g=>g.q).map(([q,a])=>`Q: ${q}\nA: ${a}`).join('\n');
+  const prj = (typeof PROJECTS!=='undefined'?PROJECTS:[]).map(p=>`- ${p.t} (#${p.id}): ${p.d}`).join('\n');
+  return `You are the virtual assistant on the website of Azure Horizon, a full-service communications and marketing agency for purpose-driven organisations (international organisations, NGOs, government, foundations, health, climate, education, humanitarian, corporate CSR).
+
+SERVICES
+${svc}
+
+FAQ
+${faq}
+
+SAMPLE PORTFOLIO PROJECTS (formats the agency delivers; not named clients)
+${prj}
+
+CONTACT
+Email ${AI_CONFIG.email}. Phone ${AI_CONFIG.phone}. Contact page #contact. FAQ page #faq. Portfolio #portfolio. Services overview #services.
+
+RULES
+- Answer in the visitor's language, warmly and concisely: 1 to 4 short sentences, or a short bulleted list. Plain text with **bold** and "- " bullets only.
+- Only use the facts above. Never invent prices, budgets, client names, results, staff names, availability or dates. For pricing, explain that every project is quoted after a first conversation and offer to book one.
+- When useful, link a page by writing its hash in brackets like [Graphic Design](#graphic-design).
+- When the visitor wants to book a consultation or call, request a service or quote, or send a message to the team, call the open_form tool with the right type and prefill anything they already told you (name, email, organisation, service id, timeline, details). Never claim a booking or message is sent: the visitor confirms in the form.
+- If a question is outside Azure Horizon's work, say briefly that you can only help with Azure Horizon and offer the contact form.
+- Never use em dashes.`;
+}
+
+/* ---------- UI ---------- */
+document.body.insertAdjacentHTML('beforeend',`
+<button class="ai-fab" id="aiFab" aria-label="Chat with our AI assistant"><span class="pulse"></span>${ICON_BOT.replace('#fff','#fff')}<span class="t">Ask Azure AI</span></button>
+<section class="ai-panel" id="aiPanel" role="dialog" aria-label="Azure Horizon assistant" aria-modal="false">
+  <div class="ai-head"><div class="ai-av">${ICON_BOT}</div><div><b>Azure Horizon assistant</b><small id="aiStatus"><i></i>Online</small></div><span class="sp"></span>
+    <button id="aiReset" title="New conversation" aria-label="New conversation">↺</button><button id="aiClose" aria-label="Close chat">×</button></div>
+  <div class="ai-body" id="aiBody" aria-live="polite"></div>
+  <div class="ai-foot"><form class="ai-form" id="aiForm"><textarea id="aiIn" rows="1" placeholder="Ask about services, pricing, timelines…" aria-label="Your message"></textarea><button id="aiSend" type="submit" aria-label="Send">${ICON_SEND}</button></form>
+  <div class="ai-note" id="aiNote">AI answers may be imperfect. For anything important, contact the team.</div></div>
+</section>`);
+const body=$('#aiBody'), input=$('#aiIn'), sendBtn=$('#aiSend');
+let history=[], busy=false, mode='checking', sample=null, started=false, ctrl=null;
+
+function setStatus(){
+  const st=$('#aiStatus');
+  if(mode==='ai'){st.className='';st.innerHTML='<i></i>AI assistant · online'}
+  else {st.className='off';st.innerHTML='<i></i>Quick answers'}
+}
+function md(t){
+  let h=esc(t);
+  h=h.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+  h=h.replace(/\[([^\]]+)\]\((#[a-z0-9-]+)\)/gi,'<a href="$2" data-ai-link>$1</a>');
+  const lines=h.split(/\n/); let out='',inList=false;
+  for(const l of lines){
+    if(/^\s*[-•]\s+/.test(l)){if(!inList){out+='<ul>';inList=true}out+='<li>'+l.replace(/^\s*[-•]\s+/,'')+'</li>'}
+    else{if(inList){out+='</ul>';inList=false}if(l.trim())out+='<p>'+l+'</p>'}
+  }
+  if(inList)out+='</ul>';
+  return out;
+}
+function addMsg(who,text,raw=false){
+  const d=document.createElement('div');d.className='ai-msg '+who;d.innerHTML=raw?text:(who==='bot'?md(text):esc(text));
+  body.appendChild(d);scroll();return d;
+}
+function addChips(list){
+  const d=document.createElement('div');d.className='ai-chips';
+  d.innerHTML=list.map(c=>`<button data-chip="${esc(c[1])}">${esc(c[0])}</button>`).join('');
+  body.appendChild(d);scroll();
+}
+const scroll=()=>{body.scrollTop=body.scrollHeight};
+const MAIN_CHIPS=[["📅 Book a consultation","form:consultation"],["🧩 Request a service","form:service"],["✉️ Contact the team","form:contact"],["💬 What services do you offer?","ask:What services do you offer?"],["💶 How much do you charge?","ask:How much do you charge?"]];
+
+function greet(){
+  body.innerHTML='';history=[];
+  addMsg('bot',"Hi, I'm the Azure Horizon assistant. I can answer questions about our services, pricing and process, or help you **book a consultation**, **request a service** or **contact the team**. How can I help?");
+  addChips(MAIN_CHIPS);
+}
+function open(){document.body.classList.add('ai-open');if(!started){started=true;greet();initAI()}setTimeout(()=>input.focus(),250)}
+function close(){document.body.classList.remove('ai-open')}
+
+/* ---------- Forms inside the chat ---------- */
+const svcOptions=(sel)=>`<option value="">Select a service</option>`+SERVICES.map(s=>`<option value="${s.id}" ${s.id===sel?'selected':''}>${esc(s.name)}</option>`).join('')+`<option value="not-sure" ${sel==='not-sure'?'selected':''}>Not sure yet</option>`;
+const FORMS={
+  consultation:{title:"Book a free consultation",sub:"A 30-minute call to talk through your goals. We'll confirm a time by email.",fields:(p)=>`
+    <div class="r2"><div><label>Name *</label><input name="name" value="${esc(p.name||'')}" required></div><div><label>Email *</label><input name="email" type="email" value="${esc(p.email||'')}" required></div></div>
+    <label>Organisation</label><input name="organisation" value="${esc(p.organisation||'')}">
+    <div class="r2"><div><label>Preferred date *</label><input name="date" type="date" min="${new Date().toISOString().slice(0,10)}" value="${esc(p.date||'')}" required></div>
+    <div><label>Time</label><select name="time"><option>Morning (9–12)</option><option>Afternoon (12–15)</option><option>Late afternoon (15–18)</option></select></div></div>
+    <label>Call type</label><select name="format"><option>Video call</option><option>Phone call</option><option>In person</option></select>
+    <label>Topic</label><select name="service">${svcOptions(p.service)}</select>
+    <label>Anything we should know?</label><textarea name="details">${esc(p.details||'')}</textarea>`},
+  service:{title:"Request a service",sub:"Tell us what you need and we'll come back with ideas and a quote.",fields:(p)=>`
+    <div class="r2"><div><label>Name *</label><input name="name" value="${esc(p.name||'')}" required></div><div><label>Email *</label><input name="email" type="email" value="${esc(p.email||'')}" required></div></div>
+    <label>Organisation</label><input name="organisation" value="${esc(p.organisation||'')}">
+    <label>Service *</label><select name="service" required>${svcOptions(p.service)}</select>
+    <div class="r2"><div><label>Timeline</label><select name="timeline">${["Not sure yet","Within 1 month","1–3 months","3+ months","Ongoing support"].map(t=>`<option ${t===p.timeline?'selected':''}>${t}</option>`).join('')}</select></div>
+    <div><label>Budget</label><select name="budget"><option>Not sure yet</option><option>Small project</option><option>Medium project</option><option>Large or multi-phase</option></select></div></div>
+    <label>Project details *</label><textarea name="details" required>${esc(p.details||'')}</textarea>`},
+  contact:{title:"Send a message to the team",sub:`Or email ${esc(AI_CONFIG.email)} directly.`,fields:(p)=>`
+    <div class="r2"><div><label>Name *</label><input name="name" value="${esc(p.name||'')}" required></div><div><label>Email *</label><input name="email" type="email" value="${esc(p.email||'')}" required></div></div>
+    <label>Message *</label><textarea name="details" required>${esc(p.details||'')}</textarea>`}
+};
+function showForm(type,prefill={}){
+  const F=FORMS[type]||FORMS.contact;
+  const card=document.createElement('form');card.className='ai-card';card.dataset.type=type;card.noValidate=true;
+  card.innerHTML=`<h4>${F.title}</h4><div class="sub">${F.sub}</div>${F.fields(prefill)}<div class="err"></div><div class="acts"><button type="submit">Submit</button><button type="button" class="ghost" data-cancel>Cancel</button></div>`;
+  if(prefill.time){const s=card.querySelector('[name=time]');if(s)[...s.options].forEach(o=>{if(o.text.toLowerCase().startsWith(String(prefill.time).toLowerCase()))o.selected=true})}
+  body.appendChild(card);scroll();
+  const first=[...card.querySelectorAll('input,textarea')].find(i=>!i.value);(first||card.querySelector('input')).focus({preventScroll:true});
+  return card;
+}
+function labelOf(type){return type==='consultation'?'Consultation booking':type==='service'?'Service request':'Message'}
+function summary(type,data){
+  const svc=data.service?(SVC[data.service]?.name||'Not sure yet'):'';
+  const rows=[["Type",labelOf(type)],["Name",data.name],["Email",data.email],["Organisation",data.organisation],["Service",svc],["Preferred date",data.date],["Time",data.time],["Call type",data.format],["Timeline",data.timeline],["Budget",data.budget],["Details",data.details]];
+  return rows.filter(r=>r[1]).map(r=>`${r[0]}: ${r[1]}`).join('\n');
+}
+async function submitLead(card){
+  const type=card.dataset.type, data=Object.fromEntries(new FormData(card).entries()), err=card.querySelector('.err');
+  const missing=[...card.querySelectorAll('[required]')].filter(i=>!i.value.trim());
+  if(missing.length){err.textContent='Please fill in the required fields.';err.style.display='block';missing[0].focus();return}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)){err.textContent='Please enter a valid email address.';err.style.display='block';return}
+  const sum=summary(type,data);
+  card.querySelectorAll('input,select,textarea,button').forEach(el=>el.disabled=true);
+  let sent=false;
+  if(AI_CONFIG.leadEndpoint){
+    try{const r=await fetch(AI_CONFIG.leadEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,data,summary:sum,page:location.hash||'#home',sentAt:new Date().toISOString()})});sent=r.ok}catch(e){sent=false}
+  }
+  card.classList.add('done');
+  if(sent){
+    card.innerHTML=`<h4>✓ ${labelOf(type)} sent</h4><div class="sub">Thank you, ${esc(data.name.split(' ')[0])}. The team will reply to ${esc(data.email)} within 24 hours.</div><div class="sum">${esc(sum)}</div>`;
+    history.push({role:'assistant',content:`(The visitor submitted a ${labelOf(type).toLowerCase()} form successfully.)`});
+  } else {
+    card.innerHTML=`<h4>Your ${labelOf(type).toLowerCase()} is ready</h4><div class="sub">Online sending isn't connected yet, so nothing has been sent. Please copy the details below and email them to <b>${esc(AI_CONFIG.email)}</b>.</div><div class="sum">${esc(sum)}</div><div class="acts"><button type="button" data-copy>Copy details</button></div>`;
+    card.querySelector('[data-copy]').addEventListener('click',async e=>{try{await navigator.clipboard.writeText(sum+`\n\nTo: ${AI_CONFIG.email}`);e.target.textContent='Copied ✓'}catch(_){e.target.textContent='Select the text above to copy'}});
+    history.push({role:'assistant',content:`(The visitor prepared a ${labelOf(type).toLowerCase()} but online sending is not connected; they were asked to email ${AI_CONFIG.email}.)`});
+  }
+  scroll();
+}
+
+/* ---------- AI backends ---------- */
+async function initAI(){
+  setStatus();
+  if(AI_CONFIG.chatEndpoint){mode='ai';setStatus()}
+  try{
+    if(window.claude&&typeof window.claude.use==='function'){
+      const s=await window.claude.use('sample');
+      if(s){sample=s;mode='ai'}
+    }
+  }catch(e){}
+  if(mode==='checking')mode='local';
+  setStatus();
+}
+const openFormTool={name:"open_form",description:"Show a form in the chat so the visitor can book a consultation, request a service, or send a message to the team. Prefill what the visitor already said.",
+  inputSchema:{type:"object",properties:{type:{type:"string",enum:["consultation","service","contact"]},name:{type:"string"},email:{type:"string"},organisation:{type:"string"},service:{type:"string",enum:SERVICES.map(s=>s.id).concat(["not-sure"])},timeline:{type:"string",enum:["Not sure yet","Within 1 month","1–3 months","3+ months","Ongoing support"]},date:{type:"string",description:"YYYY-MM-DD"},time:{type:"string",enum:["Morning","Afternoon","Late afternoon"]},details:{type:"string"}},required:["type"]}};
+
+async function askSample(bubble){
+  const msgs=[{role:'user',content:knowledge()+'\n\n(Conversation starts below. Reply only as the assistant.)'},{role:'assistant',content:'Understood.'},...history.slice(-14)];
+  let shownForm=false;
+  const res=await sample(msgs,{cache:false,modelTier:'quick',signal:ctrl.signal,
+    onText:({text})=>{if(text&&text!=='Thinking...'){bubble.innerHTML=md(text);scroll()}},
+    tools:[{...openFormTool,execute:(inp)=>{shownForm=true;const {type,...p}=inp||{};showForm(type||'contact',p);return {shown:true,note:"Form displayed. Tell the visitor to review and submit it."}}}]});
+  return {text:res.text||'',shownForm};
+}
+async function askEndpoint(bubble){
+  const r=await fetch(AI_CONFIG.chatEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({messages:history.slice(-14),knowledge:knowledge()})});
+  if(!r.ok)throw new Error('endpoint '+r.status);
+  const j=await r.json();
+  let shownForm=false;
+  if(j.form&&j.form.type){shownForm=true;const {type,...p}=j.form;showForm(type,p)}
+  bubble.innerHTML=md(j.text||'');
+  return {text:j.text||'',shownForm};
+}
+
+/* ---------- Quick answers (no AI) ---------- */
+const STOP=new Set('the a an and or of to for in on is are do does you your we our i my me can how what with about it this that be at as by from any'.split(' '));
+const words=t=>t.toLowerCase().replace(/[^a-z0-9à-ÿ\s]/g,' ').split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
+function local(q){
+  const t=q.toLowerCase();
+  if(/\b(book|booking|consult|consultation|call|meeting|meet|appointment|schedule|zoom|teams)\b/.test(t))return {text:"Happy to set that up. Pick a date and time below and we'll confirm by email.",form:'consultation'};
+  if(/\b(quote|request|hire|need help with|proposal|brief|start a project|new project)\b/.test(t)){const s=SERVICES.find(s=>t.includes(s.name.toLowerCase().split(' ')[0]));return {text:"Great. Tell us a little about the project and we'll come back with ideas and a quote.",form:'service',prefill:s?{service:s.id}:{}}}
+  if(/\b(contact|email|phone|reach|talk to|speak|message)\b/.test(t))return {text:`You can email **${AI_CONFIG.email}** or call **${AI_CONFIG.phone}**. You'll speak directly to the people working on your project. Or send a message here:`,form:'contact'};
+  if(/\b(services|offer|what do you do|capabilities)\b/.test(t))return {text:"We offer:\n"+SERVICES.map(s=>`- [${s.name}](#${s.id})`).join('\n')+"\n\nWould you like to request one of these?"};
+  if(/\b(portfolio|work|examples|samples|case stud)/.test(t))return {text:"You can browse sample projects on our [Portfolio](#portfolio), from campaigns and brand identities to films, websites and pitch decks."};
+  const svc=SERVICES.map(s=>({s,score:words(s.name+' '+s.short+' '+s.deliver.join(' ')).filter(w=>words(q).includes(w)).length})).sort((a,b)=>b.score-a.score)[0];
+  const faqs=FAQS.flatMap(g=>g.q).map(([fq,a])=>({fq,a,score:words(fq).filter(w=>words(q).includes(w)).length*2+words(a).filter(w=>words(q).includes(w)).length*.5})).sort((a,b)=>b.score-a.score)[0];
+  if(faqs&&faqs.score>=2&&(!svc||faqs.score>=svc.score))return {text:faqs.a};
+  if(svc&&svc.score>=1)return {text:`**${svc.s.name}**: ${svc.s.intro}\n\n[Read more](#${svc.s.id}) or request it below.`,chips:[["Request "+svc.s.name,`form:service:${svc.s.id}`],["Book a consultation","form:consultation"]]};
+  return {text:"I'm not sure I have the answer to that. You can browse our [FAQ](#faq), or I can pass your question to the team.",chips:[["✉️ Contact the team","form:contact"],["📅 Book a consultation","form:consultation"]]};
+}
+
+/* ---------- Send ---------- */
+async function send(text){
+  text=text.trim(); if(!text||busy)return;
+  addMsg('me',text); history.push({role:'user',content:text});
+  input.value='';autosize();busy=true;sendBtn.disabled=true;
+  const bubble=addMsg('bot','<span class="ai-typing"><span></span><span></span><span></span></span>',true);
+  ctrl=new AbortController();
+  let reply='',done=false;
+  if(mode==='ai'){
+    try{
+      const r=sample?await askSample(bubble):await askEndpoint(bubble);
+      reply=r.text;done=true;
+      if(reply.trim())bubble.innerHTML=md(reply);
+      else{bubble.innerHTML=md(r.shownForm?"Here's a form for that. Review the details and submit when ready.":"Sorry, I couldn't produce an answer. Could you rephrase?")}
+    }catch(e){
+      if(e&&e.code==='not_granted'){sample=null;mode=AI_CONFIG.chatEndpoint?'ai':'local';setStatus()}
+      else if(e&&e.code==='rate_limited'){bubble.innerHTML=md("I'm getting a lot of questions right now. Here's a quick answer instead:")}
+      else if(!sample){mode='local';setStatus()}
+      done=false;
+    }
+  }
+  if(!done){
+    const r=local(text);reply=r.text;
+    bubble.innerHTML=(bubble.textContent.trim()&&!bubble.querySelector('.ai-typing')?bubble.innerHTML:'')+md(r.text);
+    if(r.form)showForm(r.form,r.prefill||{});
+    if(r.chips)addChips(r.chips);
+  }
+  history.push({role:'assistant',content:reply||'(form shown)'});
+  busy=false;sendBtn.disabled=false;scroll();
+}
+function autosize(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,110)+'px'}
+
+/* ---------- Events ---------- */
+$('#aiFab').addEventListener('click',open);
+$('#aiClose').addEventListener('click',close);
+$('#aiReset').addEventListener('click',()=>{if(ctrl)ctrl.abort();busy=false;sendBtn.disabled=false;greet()});
+$('#aiForm').addEventListener('submit',e=>{e.preventDefault();send(input.value)});
+input.addEventListener('input',autosize);
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(input.value)}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('ai-open'))close()});
+body.addEventListener('click',e=>{
+  const c=e.target.closest('[data-chip]');
+  if(c){const v=c.dataset.chip;c.parentElement.remove();
+    if(v.startsWith('ask:'))send(v.slice(4));
+    else if(v.startsWith('form:')){const [,type,svc]=v.split(':');addMsg('me',c.textContent.replace(/^\S+\s/,''));showForm(type,svc?{service:svc}:{})}
+    return}
+  if(e.target.closest('[data-cancel]')){const card=e.target.closest('.ai-card');card.remove();addMsg('bot',"No problem. Anything else I can help with?");addChips(MAIN_CHIPS);return}
+  if(e.target.closest('[data-ai-link]')&&innerWidth<560)close();
+});
+body.addEventListener('submit',e=>{if(e.target.classList.contains('ai-card')){e.preventDefault();e.stopPropagation();submitLead(e.target)}},true);
+document.addEventListener('click',e=>{const t=e.target.closest('[data-chat]');if(t){e.preventDefault();open();if(t.dataset.chat)setTimeout(()=>{const [type,svc]=t.dataset.chat.split(':');showForm(type,svc?{service:svc}:{})},300)}});
+})();
 </script>
 </body>
 </html>

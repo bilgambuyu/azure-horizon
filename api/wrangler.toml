@@ -1,0 +1,7 @@
+name = "azure-horizon-ai"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://bilgambuyu.github.io"
+MODEL = "claude-haiku-5-5"

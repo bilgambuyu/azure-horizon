@@ -15,3 +15,36 @@ The site ships with a cohesive local editorial image set in `img/`. Image assign
 
 ## Run locally
 Open `index.html` in a browser, or serve the folder: `python3 -m http.server`.
+
+## AI assistant
+A chat assistant (bottom-right "Ask Azure AI" button) answers questions about services, pricing and process, and lets visitors **book a consultation**, **request a service** or **contact the team** through forms inside the chat.
+
+It picks the first AI backend that is available:
+1. **claude.ai artifact**: when the site is viewed as a claude.ai artifact, it uses Claude through the page's `sample` capability. Nothing to configure.
+2. **Your own endpoint**: set `AI_CONFIG.chatEndpoint` in `index.html` to the URL of the Cloudflare Worker in `api/`.
+3. **Quick answers**: with no AI available it answers from the site's FAQ and services and still shows the forms.
+
+### Deploy the backend (Cloudflare Worker)
+```bash
+cd api
+npm i -g wrangler
+wrangler login
+wrangler secret put ANTHROPIC_API_KEY      # your Anthropic API key, never put it in index.html
+# optional, to receive bookings/requests:
+wrangler secret put LEAD_WEBHOOK_URL       # e.g. a Make, Zapier, Formspree or Slack webhook
+# or email via Resend:
+wrangler secret put RESEND_API_KEY
+wrangler secret put LEAD_TO_EMAIL
+wrangler deploy
+```
+Then in `index.html` set:
+```js
+const AI_CONFIG = {
+  chatEndpoint: "https://azure-horizon-ai.<your-subdomain>.workers.dev/chat",
+  leadEndpoint: "https://azure-horizon-ai.<your-subdomain>.workers.dev/lead",
+  ...
+};
+```
+Set `ALLOWED_ORIGIN` in `api/wrangler.toml` to your site's address so only your site can use the worker.
+
+Until `leadEndpoint` is set, submitted forms are **not sent**: the chat tells the visitor so and offers a "Copy details" button with your email address.

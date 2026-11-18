@@ -85,8 +85,24 @@ nav.main a.active{color:var(--azure-l);opacity:1}
 .hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;padding:0 0 12vh;overflow:hidden}
 .hero.inner{min-height:62vh;padding-bottom:9vh}
 .hero>.ph{position:absolute;inset:0}
-.hero.plain{background:radial-gradient(90% 80% at 85% 20%,rgba(61,139,255,.28) 0%,rgba(61,139,255,0) 60%),linear-gradient(180deg,#0d1730 0%,var(--ink) 100%)}
-.hero.plain::after{display:none}
+.hero.plain{background:radial-gradient(70% 70% at 80% 52%,rgba(61,139,255,.22) 0%,rgba(61,139,255,0) 65%),linear-gradient(180deg,#0b1430 0%,#0f1424 55%,var(--ink) 100%)}
+.hero.plain::after{background:linear-gradient(90deg,rgba(14,17,28,.85) 0%,rgba(14,17,28,.35) 45%,rgba(14,17,28,0) 70%),linear-gradient(180deg,rgba(14,17,28,0) 70%,var(--ink) 100%)}
+.geo{position:absolute;inset:0;width:100%;height:100%}
+.geo .rays{transform-box:view-box;transform-origin:1150px 470px;animation:geoSpin 120s linear infinite}
+.geo .dash{animation:geoDash 30s linear infinite}
+.geo .dash2{animation:geoDash 45s linear infinite reverse}
+.geo .core{animation:geoGlow 6s ease-in-out infinite}
+.geo .float{animation:geoFloat 9s ease-in-out infinite}
+.geo .float2{animation:geoFloat 12s ease-in-out infinite reverse}
+@keyframes geoSpin{to{transform:rotate(360deg)}}
+@keyframes geoDash{to{stroke-dashoffset:-400}}
+@keyframes geoGlow{0%,100%{opacity:.9}50%{opacity:.6}}
+@keyframes geoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero .wrap>*{animation:heroIn 1s cubic-bezier(.2,.7,.2,1) both}
+.hero .wrap>*:nth-child(2){animation-delay:.12s}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:720px){.hero.plain::after{background:linear-gradient(180deg,rgba(14,17,28,.1) 0%,rgba(14,17,28,.55) 55%,rgba(14,17,28,.95) 100%)}}
+@media (prefers-reduced-motion:reduce){.geo *,.hero .wrap>*{animation:none!important}}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,20,.55) 0%,rgba(10,12,20,.15) 40%,rgba(10,12,20,.75) 100%)}
 .hero .wrap{position:relative;z-index:2;width:100%}
 .hero h1{font-size:clamp(2.3rem,6.4vw,4.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1.02}
@@ -487,8 +503,59 @@ function ph(key, cls=''){
 const bar = '<div class="bar"></div>';
 const arrow = '<span class="arrow">→</span>';
 
+function geo(){
+  const cx=1150, cy=470;
+  const rays=Array.from({length:72},(_,i)=>{const a=i*5*Math.PI/180;return `<line x1="${cx}" y1="${cy}" x2="${(cx+Math.cos(a)*1400).toFixed(1)}" y2="${(cy+Math.sin(a)*1400).toFixed(1)}" stroke-opacity="${i%3?0.05:0.11}"/>`}).join('');
+  const rings=[[110,.55,''],[160,.32,'2 10','dash'],[220,.22,''],[290,.16,'1 7','dash2'],[370,.12,''],[460,.09,'40 14','dash'],[560,.07,''],[680,.05,'2 12','dash2'],[820,.04,'']]
+    .map(([r,o,d,c])=>`<circle cx="${cx}" cy="${cy}" r="${r}" stroke-opacity="${o}" ${d?`stroke-dasharray="${d}" class="${c}"`:''}/>`).join('');
+  let hz='';for(let k=1;k<=12;k++){const y=cy+Math.pow(k,1.85)*3.6;hz+=`<line x1="0" y1="${y.toFixed(1)}" x2="1440" y2="${y.toFixed(1)}" stroke-opacity="${(0.04+k*0.008).toFixed(3)}"/>`}
+  let vt='';for(let k=-14;k<=14;k++){vt+=`<line x1="${cx}" y1="${cy}" x2="${cx+k*150}" y2="900" stroke-opacity="${k%2?0.05:0.09}"/>`}
+  const plus=(x,y,o=.5)=>`<path d="M${x-7} ${y}h14M${x} ${y-7}v14" stroke="#93c0ff" stroke-opacity="${o}" stroke-width="1.4"/>`;
+  return `<svg class="geo" viewBox="0 0 1440 900" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+  <defs>
+    <pattern id="gdots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" fill="#cfe2ff"/></pattern>
+    <radialGradient id="gdm" cx="${cx/1440}" cy="${cy/900}" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".6" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <mask id="gdmask"><rect width="1440" height="${cy}" fill="url(#gdm)"/></mask>
+    <radialGradient id="gcore"><stop offset="0" stop-color="#e6f0ff"/><stop offset=".45" stop-color="#93c0ff"/><stop offset="1" stop-color="#3d8bff"/></radialGradient>
+    <radialGradient id="ghalo"><stop offset="0" stop-color="#6ea6ff" stop-opacity=".45"/><stop offset="1" stop-color="#6ea6ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ghz" x1="0" x2="1"><stop offset="0" stop-color="#93c0ff" stop-opacity="0"/><stop offset=".55" stop-color="#93c0ff" stop-opacity=".5"/><stop offset=".8" stop-color="#cfe2ff" stop-opacity=".95"/><stop offset="1" stop-color="#93c0ff" stop-opacity=".4"/></linearGradient>
+    <linearGradient id="gfl" x1="0" x2="1"><stop offset="0" stop-color="#000"/><stop offset=".45" stop-color="#555"/><stop offset=".75" stop-color="#fff"/></linearGradient>
+    <mask id="gleft"><rect width="1440" height="900" fill="url(#gfl)"/></mask>
+    <clipPath id="gabove"><rect width="1440" height="${cy}"/></clipPath>
+    <clipPath id="gbelow"><rect y="${cy}" width="1440" height="${900-cy}"/></clipPath>
+  </defs>
+  <rect width="1440" height="${cy}" fill="url(#gdots)" mask="url(#gdmask)"/>
+  <g mask="url(#gleft)">
+    <g clip-path="url(#gabove)" stroke="#93c0ff" fill="none"><g class="rays">${rays}</g></g>
+    <g clip-path="url(#gabove)" stroke="#93c0ff" fill="none" stroke-width="1.2">${rings}</g>
+    <g clip-path="url(#gbelow)" stroke="#93c0ff" fill="none">${hz}${vt}</g>
+  </g>
+  <g clip-path="url(#gabove)">
+    <circle cx="${cx}" cy="${cy}" r="260" fill="url(#ghalo)"/>
+    <circle class="core" cx="${cx}" cy="${cy}" r="96" fill="url(#gcore)"/>
+    <circle cx="${cx}" cy="${cy}" r="96" fill="none" stroke="#e6f0ff" stroke-opacity=".6"/>
+  </g>
+  <g clip-path="url(#gbelow)" fill="#cfe2ff">
+    <rect x="${cx-110}" y="${cy+12}" width="220" height="2.5" rx="1.2" opacity=".35"/>
+    <rect x="${cx-70}" y="${cy+26}" width="140" height="2" rx="1" opacity=".25"/>
+    <rect x="${cx-40}" y="${cy+42}" width="80" height="1.6" rx=".8" opacity=".18"/>
+  </g>
+  <rect y="${cy-1}" width="1440" height="2" fill="url(#ghz)"/>
+  <g class="float">
+    <rect x="${cx-372}" y="${cy-300}" width="34" height="34" fill="none" stroke="#93c0ff" stroke-opacity=".45" transform="rotate(45 ${cx-355} ${cy-283})"/>
+    <circle cx="${cx+250}" cy="${cy-330}" r="5" fill="#3d8bff"/>
+    ${plus(cx-160,cy-380,.55)}
+  </g>
+  <g class="float2">
+    <circle cx="${cx-520}" cy="${cy-170}" r="18" fill="none" stroke="#93c0ff" stroke-opacity=".3"/>
+    <circle cx="${cx-520}" cy="${cy-170}" r="3" fill="#93c0ff" fill-opacity=".7"/>
+    ${plus(cx+190,cy-110,.4)}
+    <path d="M${cx-300} ${cy-60}l14 -24l14 24z" fill="none" stroke="#93c0ff" stroke-opacity=".35"/>
+  </g>
+  </svg>`;
+}
 function hero(key, title, lead='', crumb='', inner=true){
-  return `<section class="hero ${inner?'inner':''} ${key?'':'plain'}">${key?ph(key):''}<div class="wrap">${crumb?`<span class="crumb">${crumb}</span>`:''}<h1>${title}</h1>${lead?`<p class="lead">${lead}</p>`:''}</div></section>`;
+  return `<section class="hero ${inner?'inner':''} ${key?'':'plain'}">${key?ph(key):geo()}<div class="wrap">${crumb?`<span class="crumb">${crumb}</span>`:''}<h1>${title}</h1>${lead?`<p class="lead">${lead}</p>`:''}</div></section>`;
 }
 function band(title, navy=false, cta="Contact us"){
   return `<section class="band ${navy?'navy':''}"><div class="wrap rv"><h2>${title}</h2><a href="#contact" class="btn">${cta}</a></div></section>`;

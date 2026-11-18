@@ -102,6 +102,9 @@ nav.main a.active{color:var(--azure-l);opacity:1}
 @media (max-width:720px){.hero.plain::after{background:linear-gradient(180deg,rgba(14,17,28,.1) 0%,rgba(14,17,28,.55) 55%,rgba(14,17,28,.95) 100%)}}
 @media (prefers-reduced-motion:reduce){.geo *,.hero .wrap>*{animation:none!important}}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,20,.55) 0%,rgba(10,12,20,.15) 40%,rgba(10,12,20,.75) 100%)}
+.hero:not(.inner):not(.plain)::after{background:linear-gradient(90deg,rgba(8,14,32,.82) 0%,rgba(8,14,32,.55) 40%,rgba(8,14,32,.15) 68%,rgba(8,14,32,0) 100%),linear-gradient(180deg,rgba(8,14,32,.45) 0%,rgba(8,14,32,0) 30%,rgba(8,14,32,.25) 65%,rgba(14,17,28,.9) 100%)}
+.hero:not(.inner):not(.plain)>.ph img{filter:saturate(.9) brightness(.92)}
+@media (max-width:720px){.hero:not(.inner):not(.plain)::after{background:linear-gradient(180deg,rgba(8,14,32,.5) 0%,rgba(8,14,32,.3) 35%,rgba(8,14,32,.75) 65%,rgba(14,17,28,.95) 100%)}}
 .hero .wrap{position:relative;z-index:2;width:100%}
 .hero h1{font-size:clamp(2.3rem,6.4vw,4.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1.02}
 .hero.inner h1{font-size:clamp(2rem,5vw,3.6rem)}
@@ -675,7 +678,7 @@ function band(title, navy=false, cta="Contact us"){
 /* ---------------- Pages ---------------- */
 function home(){
   return `
-  ${hero(null,'Azure Horizon','Strategy, creative and digital communications for organisations that want to move people and drive change.','',false)}
+  ${hero('hero','Azure Horizon','Strategy, creative and digital communications for organisations that want to move people and drive change.','',false)}
 
   <section><div class="wrap split">
     <div class="rv"><h2>Your partner in strategic communications and creative impact</h2><br>

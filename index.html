@@ -74,7 +74,7 @@ nav.main a.active{color:var(--azure-l);opacity:1}
 .mnav .sub a{font-size:.95rem;font-weight:400;color:var(--muted);padding:7px 0 7px 14px;border:0}
 .mnav .x{position:absolute;top:22px;right:22px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
 
-/* Image placeholders */
+/* Local editorial image assets */
 .ph{position:relative;overflow:hidden;background:#1e3a8a}
 .ph img{width:100%;height:100%;object-fit:cover}
 .ph-art{position:absolute;inset:0;width:100%;height:100%}
@@ -313,52 +313,52 @@ footer p{font-size:.82rem;color:#3b404c}
 
 <script>
 /* ============================================================
-   IMAGE SLOTS — replace src with a data URI or a relative file
-   path (e.g. "img/hero.jpg") to swap a placeholder for a photo.
+   IMAGE SLOTS — local editorial photos keep the site self-contained.
+   Swap any src path here to customize the visual system for a new project.
    ============================================================ */
 const IMG = {
-  hero:        {label:"Hero: confident team lead presenting in a bright studio", src:""},
-  intro:       {label:"Two colleagues collaborating over a laptop", src:""},
-  impactBg:    {label:"Background: campaign planning wall / storyboards", src:""},
-  apart:       {label:"Facilitator leading a workshop", src:""},
-  p_strategy:  {label:"Strategy session with sticky notes", src:""},
-  p_creative:  {label:"Designer with colour swatches & sketches", src:""},
-  p_digital:   {label:"Laptop with code / website on screen", src:""},
-  p_partner:   {label:"Partnership meeting or handshake", src:""},
-  aboutHero:   {label:"About hero: team in the studio", src:""},
-  aboutStory:  {label:"Team brainstorming around a table", src:""},
-  aboutWork1:  {label:"Behind the scenes: filming an interview", src:""},
-  aboutWork2:  {label:"Behind the scenes: design review", src:""},
-  servicesHero:{label:"Services hero: creative team at work", src:""},
-  workHero:    {label:"Work hero: wall of printed campaign materials", src:""},
-  insightsHero:{label:"Insights hero: person reading at a desk", src:""},
-  contactHero: {label:"Contact hero: welcoming office or reception", src:""},
-  contactSide: {label:"Small team photo or office exterior", src:""},
-  "communication-strategy":{label:"Strategy workshop with sticky notes", src:""},
-  "advocacy":              {label:"Panel discussion at a policy event", src:""},
-  "public-relations":      {label:"Spokesperson in a media interview", src:""},
-  "graphic-design":        {label:"Designer at desk with printed layouts", src:""},
-  "motion-design":         {label:"Animator working on a timeline", src:""},
-  "video-editing":         {label:"Editor at a dual-screen editing suite", src:""},
-  "web-development":       {label:"Developer coding on a laptop", src:""},
-  "marketing":             {label:"Analytics dashboard on a screen", src:""},
-  "resource-mobilization": {label:"Donor roundtable or partnership meeting", src:""},
-  "multimedia-production": {label:"Camera crew filming on location", src:""},
-  w1:{label:"Campaign: posters / social assets in context", src:""},
-  w2:{label:"Brand identity mock-up (stationery, signage)", src:""},
-  w3:{label:"Still frame from an animated explainer", src:""},
-  w4:{label:"Conference stage / event highlight frame", src:""},
-  w5:{label:"Microsite on laptop and phone", src:""},
-  w6:{label:"Pitch deck / proposal pages spread", src:""},
-  w7:{label:"Podcast recording setup", src:""},
-  w8:{label:"Annual report spreads", src:""},
-  w9:{label:"Press conference or media briefing", src:""},
-  i1:{label:"Crowd at a public campaign event", src:""},
-  i2:{label:"Hands sketching storyboard frames", src:""},
-  i3:{label:"Person viewing a website on mobile", src:""},
-  i4:{label:"Funding meeting with documents", src:""},
-  i5:{label:"Filmmaker with camera outdoors", src:""},
-  i6:{label:"Infographic printed on a wall", src:""}
+  hero:        {label:"Hero: confident team lead presenting in a bright studio", src:"img/hero.jpg"},
+  intro:       {label:"Two colleagues collaborating over a laptop", src:"img/collaboration.jpg"},
+  impactBg:    {label:"Background: campaign planning wall / storyboards", src:"img/workshop.jpg"},
+  apart:       {label:"Facilitator leading a workshop", src:"img/workshop.jpg"},
+  p_strategy:  {label:"Strategy session with sticky notes", src:"img/workshop.jpg"},
+  p_creative:  {label:"Designer with colour swatches & sketches", src:"img/design.jpg"},
+  p_digital:   {label:"Laptop with code / website on screen", src:"img/digital-production.jpg"},
+  p_partner:   {label:"Partnership meeting or handshake", src:"img/collaboration.jpg"},
+  aboutHero:   {label:"About hero: team in the studio", src:"img/hero.jpg"},
+  aboutStory:  {label:"Team brainstorming around a table", src:"img/collaboration.jpg"},
+  aboutWork1:  {label:"Behind the scenes: filming an interview", src:"img/digital-production.jpg"},
+  aboutWork2:  {label:"Behind the scenes: design review", src:"img/design.jpg"},
+  servicesHero:{label:"Services hero: creative team at work", src:"img/workshop.jpg"},
+  workHero:    {label:"Work hero: wall of printed campaign materials", src:"img/design.jpg"},
+  insightsHero:{label:"Insights hero: person reading at a desk", src:"img/collaboration.jpg"},
+  contactHero: {label:"Contact hero: welcoming office or reception", src:"img/hero.jpg"},
+  contactSide: {label:"Small team photo or office exterior", src:"img/collaboration.jpg"},
+  "communication-strategy":{label:"Strategy workshop with sticky notes", src:"img/workshop.jpg"},
+  "advocacy":              {label:"Panel discussion at a policy event", src:"img/workshop.jpg"},
+  "public-relations":      {label:"Spokesperson in a media interview", src:"img/hero.jpg"},
+  "graphic-design":        {label:"Designer at desk with printed layouts", src:"img/design.jpg"},
+  "motion-design":         {label:"Animator working on a timeline", src:"img/digital-production.jpg"},
+  "video-editing":         {label:"Editor at a dual-screen editing suite", src:"img/digital-production.jpg"},
+  "web-development":       {label:"Developer coding on a laptop", src:"img/digital-production.jpg"},
+  "marketing":             {label:"Analytics dashboard on a screen", src:"img/digital-production.jpg"},
+  "resource-mobilization": {label:"Donor roundtable or partnership meeting", src:"img/collaboration.jpg"},
+  "multimedia-production": {label:"Camera crew filming on location", src:"img/digital-production.jpg"},
+  w1:{label:"Campaign: posters / social assets in context", src:"img/workshop.jpg"},
+  w2:{label:"Brand identity mock-up (stationery, signage)", src:"img/design.jpg"},
+  w3:{label:"Still frame from an animated explainer", src:"img/digital-production.jpg"},
+  w4:{label:"Conference stage / event highlight frame", src:"img/hero.jpg"},
+  w5:{label:"Microsite on laptop and phone", src:"img/digital-production.jpg"},
+  w6:{label:"Pitch deck / proposal pages spread", src:"img/collaboration.jpg"},
+  w7:{label:"Podcast recording setup", src:"img/digital-production.jpg"},
+  w8:{label:"Annual report spreads", src:"img/design.jpg"},
+  w9:{label:"Press conference or media briefing", src:"img/hero.jpg"},
+  i1:{label:"Crowd at a public campaign event", src:"img/workshop.jpg"},
+  i2:{label:"Hands sketching storyboard frames", src:"img/design.jpg"},
+  i3:{label:"Person viewing a website on mobile", src:"img/digital-production.jpg"},
+  i4:{label:"Funding meeting with documents", src:"img/collaboration.jpg"},
+  i5:{label:"Filmmaker with camera outdoors", src:"img/digital-production.jpg"},
+  i6:{label:"Infographic printed on a wall", src:"img/workshop.jpg"}
 };
 
 /* ---------------- Content ---------------- */

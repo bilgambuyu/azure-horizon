@@ -6,7 +6,7 @@ Single-page, multi-view website for **Azure Horizon**, a communications and mark
 - `index.html` — self-contained site (HTML, CSS, JS). Views are routed by URL hash: `#home`, `#about`, `#services`, `#work`, `#insights`, `#contact`, plus one page per service (e.g. `#graphic-design`).
 
 ## Images
-All images are labelled placeholders. To add photos, edit the `IMG` object at the top of the script and set `src` to a relative path, e.g. `"img/hero.jpg"`.
+The site ships with a cohesive local editorial image set in `img/`. Image assignments are centralized in the `IMG` object near the top of the script; update any `src` path there to customize a slot.
 
 ## Before launch
 - Replace placeholder contact details (email, phone, city).

@@ -295,6 +295,20 @@ form textarea{min-height:140px;resize:vertical}
 .faq summary::after{content:"+";color:var(--azure-l);font-size:1.3rem;line-height:1}
 .faq details[open] summary::after{content:"–"}
 .faq details p{margin-top:10px;font-size:.9rem}
+.faqpage{display:grid;grid-template-columns:280px 1fr;gap:70px}
+.faqnav{position:sticky;top:110px;align-self:start}
+.faqnav>button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.08);color:var(--muted);padding:12px 0;font-size:.92rem;cursor:pointer;transition:color .2s,padding .3s}
+.faqnav>button:hover{color:#fff;padding-left:6px}
+.faqnav .ask{margin-top:34px;background:var(--ink2);border-top:3px solid var(--azure);padding:26px 24px}
+.faqnav .ask h3{color:#fff;margin-bottom:6px;font-size:1.05rem}
+.faqnav .ask p{font-size:.86rem;margin-bottom:18px}
+.fgroup{scroll-margin-top:100px;margin-bottom:64px}
+.fgroup:last-child{margin-bottom:0}
+.fgroup .faq details{padding:22px 0}
+.fgroup .faq summary{font-size:1.05rem}
+.fgroup .faq details p{font-size:.95rem;max-width:720px}
+.faq details[open] summary{color:var(--azure-l)}
+@media (max-width:960px){.faqpage{grid-template-columns:1fr;gap:40px}.faqnav{position:static}.faqnav>button{display:inline-block;width:auto;border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:7px 14px;margin:0 6px 8px 0;font-size:.82rem}.faqnav>button:hover{padding-left:14px}.faqnav .ask{display:none}}
 
 /* Footer */
 footer{background:#fff;color:var(--dark-txt);padding:70px 0 26px}
@@ -396,6 +410,7 @@ const IMG = {
   servicesHero:{label:"Services hero: creative team at work", src:"img/workshop.jpg"},
   workHero:    {label:"Portfolio hero: wall of printed campaign materials", src:"img/design.jpg"},
   insightsHero:{label:"Insights hero: person reading at a desk", src:"img/collaboration.jpg"},
+  faqHero:     {label:"FAQ hero: team in conversation", src:"img/collaboration.jpg"},
   contactHero: {label:"Contact hero: welcoming office or reception", src:"img/hero.jpg"},
   contactSide: {label:"Small team photo or office exterior", src:"img/collaboration.jpg"},
   "communication-strategy":{label:"Strategy workshop with sticky notes", src:"img/workshop.jpg"},
@@ -575,6 +590,21 @@ const PROJECTS = [
   out:"A well-prepared launch with clear messages delivered consistently across interviews and coverage."}
 ];
 const PRJ = Object.fromEntries(PROJECTS.map(p=>[p.id,p]));
+
+const FAQS = [
+ {g:"Pricing & proposals", q:[
+  ["How much do you charge?","Every project is different, so we price each one, or a series of projects, during our first conversation or in a follow-up proposal. You'll receive a clear quote based on the scope and deliverables we agree, before any work begins."],
+  ["Typically, what do your prices include?","First, an agreed brief. Then a schedule, research and interviews with case studies, spokespeople or signatories where needed, three rounds of copy, three rounds of design and your finished product. For print, we liaise with your printer or ours and check proofs before anything goes to press. For digital, we supply every asset ready to publish."],
+  ["Do you work on one-off projects or only retainers?","Both. Many clients start with a single project (a campaign, a film, a website) and some continue with ongoing support."]]},
+ {g:"Our services", q:[
+  ["Can I pick and choose from your services?","Yes. Use one service or combine several. Just tell us what you need help with and we'll shape the support around it."],
+  ["Can you work with our existing brand guidelines?","Absolutely. We work within your brand, and can extend or refresh it if you need new assets or templates."],
+  ["Do you work with international organisations?","Yes. We understand the review processes, multilingual needs and high-level audiences of international and development organisations."]]},
+ {g:"Working together", q:[
+  ["How can I contact you?","Whichever way suits you: phone, email, Zoom, Teams or your preferred platform. We don't use account managers, so you speak directly to the people working on your project. Fill in the contact form and we'll get back to you within 24 hours."],
+  ["How quickly can you start?","Usually within one to two weeks of agreeing the brief. For urgent needs such as events or launches, talk to us and we'll do our best to fit in."],
+  ["How do reviews and feedback work?","We agree review points in the schedule at the start. You share consolidated feedback at each round, and we keep you updated so there are no surprises."]]}
+];
 
 const POSTS = [
  {img:"i1", cat:"Advocacy", t:"Five principles for advocacy campaigns that move policy",
@@ -920,12 +950,24 @@ function contact(){
   <section><div class="wrap split" style="align-items:start">
     <div class="rv"><h2>Frequently asked questions</h2>${bar}<p>Quick answers to what clients usually ask before we start.</p></div>
     <div class="faq rv">
-      <details><summary>Do you work on one-off projects or only retainers?</summary><p>Both. Many clients start with a single project (a campaign, a film, a website) and some continue with ongoing support.</p></details>
-      <details><summary>Can you work with our existing brand guidelines?</summary><p>Absolutely. We work within your brand, and can extend or refresh it if you need new assets or templates.</p></details>
-      <details><summary>How do you price your work?</summary><p>We quote per project based on scope and deliverables, and agree a clear budget before any work starts.</p></details>
-      <details><summary>Do you work with international organisations?</summary><p>Yes. We understand the review processes, multilingual needs and high-level audiences of international and development organisations.</p></details>
+      ${[FAQS[0].q[0],FAQS[0].q[1],FAQS[1].q[0],FAQS[2].q[0]].map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')}
+      <a href="#faq" class="btn" style="margin-top:28px">See all questions →</a>
     </div>
   </div></section>
+  `;
+}
+
+function faq(){
+  let n=0;
+  return `
+  ${hero('faqHero','FAQ','Frequently asked questions about how we work, what we charge and what to expect.','Help')}
+  <section><div class="wrap faqpage">
+    <aside class="faqnav rv"><span class="kick">Topics</span>${FAQS.map((c,i)=>`<button data-faqjump="${i}">${c.g}</button>`).join('')}
+      <div class="ask"><h3>Still have a question?</h3><p>Talk to the people who'll work on your project.</p><a href="#contact" class="btn solid">Contact us</a></div></aside>
+    <div>${FAQS.map((c,i)=>`<div class="fgroup" id="fg-${i}"><h2 class="rv">${c.g}</h2>${bar}
+      <div class="faq rv">${c.q.map(([q,a])=>`<details ${n++===0?'open':''}><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div>`).join('')}</div>
+  </div></section>
+  ${band("Ready to start? Tell us about your project.", true)}
   `;
 }
 
@@ -934,7 +976,7 @@ function footer(){
     <div class="ft">
       <div>${document.querySelector('.logo').outerHTML}</div>
       <div><h4>Services</h4><ul>${SERVICES.map(s=>`<li><a href="#${s.id}">${s.name}</a></li>`).join('')}</ul></div>
-      <div><h4>About</h4><p>We're a full-service communications and marketing agency for purpose-driven organisations, working globally.</p><ul style="margin-top:14px"><li><a href="#about">About us</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#insights">Insights</a></li></ul></div>
+      <div><h4>About</h4><p>We're a full-service communications and marketing agency for purpose-driven organisations, working globally.</p><ul style="margin-top:14px"><li><a href="#about">About us</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#insights">Insights</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4>Contact</h4><p>hello@azurehorizon.com<br>+00 000 000 000</p>
         <div class="soc">
           <a href="https://www.linkedin.com" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9h3v11H4zM5.5 4a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM10 9h3v1.6c.5-.9 1.7-1.8 3.4-1.8 3.3 0 3.6 2.1 3.6 4.9V20h-3v-5.6c0-1.4 0-3-1.9-3s-2.1 1.4-2.1 2.9V20h-3z"/></svg></a>
@@ -947,7 +989,7 @@ function footer(){
 }
 
 /* ---------------- Navigation ---------------- */
-const PAGES = {home, about, services, portfolio, insights, contact, work:portfolio};
+const PAGES = {home, about, services, portfolio, insights, faq, contact, work:portfolio};
 function buildNav(){
   document.getElementById('nav').innerHTML = `
     <a href="#home" data-r="home">Home</a>
@@ -956,11 +998,12 @@ function buildNav(){
       <div class="dd-menu">${SERVICES.map(s=>`<a href="#${s.id}">${s.name}</a>`).join('')}<a class="all" href="#services">All services →</a></div></div>
     <a href="#portfolio" data-r="portfolio">Portfolio</a>
     <a href="#insights" data-r="insights">Insights</a>
+    <a href="#faq" data-r="faq">FAQ</a>
     <a href="#contact" data-r="contact">Contact</a>`;
   document.getElementById('mnav').innerHTML = `<button class="x" id="mx" aria-label="Close menu">×</button>
     <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a>
     <div class="sub">${SERVICES.map(s=>`<a href="#${s.id}">${s.name}</a>`).join('')}</div>
-    <a href="#portfolio">Portfolio</a><a href="#insights">Insights</a><a href="#contact">Contact</a>
+    <a href="#portfolio">Portfolio</a><a href="#insights">Insights</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
     <br><a href="#contact" class="btn solid" style="font-size:.9rem;border:0">Start a project</a>`;
 }
 function setMenu(open){const m=document.getElementById('mnav');m.classList.toggle('open',open);m.setAttribute('aria-hidden',!open);document.body.style.overflow=open?'hidden':''}
@@ -979,7 +1022,7 @@ function render(){
   document.getElementById('app').innerHTML = page + footer();
   const top = SVC[r] ? 'services' : (PRJ[r]||r==='work') ? 'portfolio' : (PAGES[r] ? r : 'home');
   document.querySelectorAll('#nav [data-r]').forEach(a=>a.classList.toggle('active',a.dataset.r===top));
-  document.title = (PRJ[r]?PRJ[r].t+' | ':SVC[r]?SVC[r].name+' | ':(r==='work'?'Portfolio | ':r&&r!=='home'&&PAGES[r]?r[0].toUpperCase()+r.slice(1)+' | ':''))+'Azure Horizon';
+  document.title = (PRJ[r]?PRJ[r].t+' | ':SVC[r]?SVC[r].name+' | ':(r==='work'?'Portfolio | ':r==='faq'?'FAQ | ':r&&r!=='home'&&PAGES[r]?r[0].toUpperCase()+r.slice(1)+' | ':''))+'Azure Horizon';
   setMenu(false);
   window.scrollTo({top:0,behavior:'instant'});
   onScroll(); observe();
@@ -992,6 +1035,8 @@ document.addEventListener('click',e=>{
   const f = e.target.closest('.filters button');
   if(f){document.querySelectorAll('.filters button').forEach(b=>b.classList.toggle('on',b===f));
     document.querySelectorAll('.wk').forEach(w=>w.classList.toggle('hide',f.dataset.f!=='all'&&w.dataset.c!==f.dataset.f));}
+  const fj = e.target.closest('[data-faqjump]');
+  if(fj){document.getElementById('fg-'+fj.dataset.faqjump).scrollIntoView({behavior:'smooth',block:'start'});return}
   const t = e.target.closest('[data-toggle]');
   if(t){const p=t.closest('.post');p.classList.toggle('open');t.textContent=p.classList.contains('open')?'Show less':'Read more'}
   const a = e.target.closest('a[href^="#"]');

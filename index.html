@@ -86,6 +86,12 @@ nav.main a.active{color:var(--azure-l);opacity:1}
 .hero.inner{min-height:62vh;padding-bottom:9vh}
 .hero>.ph{position:absolute;inset:0}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,20,.55) 0%,rgba(10,12,20,.15) 40%,rgba(10,12,20,.75) 100%)}
+.hero-geometry{position:absolute;z-index:1;right:-2vw;top:8%;width:min(54vw,760px);height:80%;opacity:.72;pointer-events:none;overflow:visible}
+.hero-geometry .geo-line{stroke:rgba(180,214,255,.62);stroke-width:1.15;fill:none}
+.hero-geometry .geo-soft{stroke:rgba(140,188,255,.28);stroke-width:1;fill:none}
+.hero-geometry .geo-fill{fill:rgba(61,139,255,.11);stroke:rgba(180,214,255,.5);stroke-width:1}
+.hero-geometry .geo-dot{fill:#b9d7ff}
+.hero-geometry .geo-glow{fill:url(#heroGeoGlow);opacity:.8}
 .hero .wrap{position:relative;z-index:2;width:100%}
 .hero h1{font-size:clamp(2.3rem,6.4vw,4.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1.02}
 .hero.inner h1{font-size:clamp(2rem,5vw,3.6rem)}
@@ -484,9 +490,22 @@ function ph(key, cls=''){
 }
 const bar = '<div class="bar"></div>';
 const arrow = '<span class="arrow">→</span>';
+const HERO_GEOMETRY = `<svg class="hero-geometry" viewBox="0 0 760 620" aria-hidden="true" focusable="false">
+  <defs><radialGradient id="heroGeoGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#8cbcff" stop-opacity=".24"/><stop offset="1" stop-color="#8cbcff" stop-opacity="0"/></radialGradient></defs>
+  <circle class="geo-glow" cx="516" cy="286" r="185"/>
+  <circle class="geo-soft" cx="540" cy="290" r="184"/>
+  <circle class="geo-line" cx="540" cy="290" r="122"/>
+  <circle class="geo-soft" cx="540" cy="290" r="62"/>
+  <path class="geo-line" d="M142 504L354 122 718 210 600 560Z"/>
+  <path class="geo-soft" d="M86 452L330 78 742 178M214 566L424 162 690 548M388 34L718 210 530 612"/>
+  <path class="geo-line" d="M354 122L540 290 718 210M540 290L600 560M540 290L142 504"/>
+  <rect class="geo-fill" x="467" y="217" width="146" height="146" transform="rotate(18 540 290)"/>
+  <circle class="geo-dot" cx="354" cy="122" r="4"/><circle class="geo-dot" cx="718" cy="210" r="4"/><circle class="geo-dot" cx="600" cy="560" r="4"/><circle class="geo-dot" cx="142" cy="504" r="4"/>
+  <path class="geo-soft" d="M420 80h118M642 396h84M84 244h92"/>
+</svg>`;
 
 function hero(key, title, lead='', crumb='', inner=true){
-  return `<section class="hero ${inner?'inner':''}">${ph(key)}<div class="wrap">${crumb?`<span class="crumb">${crumb}</span>`:''}<h1>${title}</h1>${lead?`<p class="lead">${lead}</p>`:''}</div></section>`;
+  return `<section class="hero ${inner?'inner':''}">${ph(key)}${HERO_GEOMETRY}<div class="wrap">${crumb?`<span class="crumb">${crumb}</span>`:''}<h1>${title}</h1>${lead?`<p class="lead">${lead}</p>`:''}</div></section>`;
 }
 function band(title, navy=false, cta="Contact us"){
   return `<section class="band ${navy?'navy':''}"><div class="wrap rv"><h2>${title}</h2><a href="#contact" class="btn">${cta}</a></div></section>`;

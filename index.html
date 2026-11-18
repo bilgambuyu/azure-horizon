@@ -85,6 +85,8 @@ nav.main a.active{color:var(--azure-l);opacity:1}
 .hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;padding:0 0 12vh;overflow:hidden}
 .hero.inner{min-height:62vh;padding-bottom:9vh}
 .hero>.ph{position:absolute;inset:0}
+.hero.plain{background:radial-gradient(90% 80% at 85% 20%,rgba(61,139,255,.28) 0%,rgba(61,139,255,0) 60%),linear-gradient(180deg,#0d1730 0%,var(--ink) 100%)}
+.hero.plain::after{display:none}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,20,.55) 0%,rgba(10,12,20,.15) 40%,rgba(10,12,20,.75) 100%)}
 .hero .wrap{position:relative;z-index:2;width:100%}
 .hero h1{font-size:clamp(2.3rem,6.4vw,4.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1.02}
@@ -486,7 +488,7 @@ const bar = '<div class="bar"></div>';
 const arrow = '<span class="arrow">→</span>';
 
 function hero(key, title, lead='', crumb='', inner=true){
-  return `<section class="hero ${inner?'inner':''}">${ph(key)}<div class="wrap">${crumb?`<span class="crumb">${crumb}</span>`:''}<h1>${title}</h1>${lead?`<p class="lead">${lead}</p>`:''}</div></section>`;
+  return `<section class="hero ${inner?'inner':''} ${key?'':'plain'}">${key?ph(key):''}<div class="wrap">${crumb?`<span class="crumb">${crumb}</span>`:''}<h1>${title}</h1>${lead?`<p class="lead">${lead}</p>`:''}</div></section>`;
 }
 function band(title, navy=false, cta="Contact us"){
   return `<section class="band ${navy?'navy':''}"><div class="wrap rv"><h2>${title}</h2><a href="#contact" class="btn">${cta}</a></div></section>`;
@@ -495,7 +497,7 @@ function band(title, navy=false, cta="Contact us"){
 /* ---------------- Pages ---------------- */
 function home(){
   return `
-  ${hero('hero','Azure Horizon','Strategy, creative and digital communications for organisations that want to move people and drive change.','Communications · Creative · Impact',false)}
+  ${hero(null,'Azure Horizon','Strategy, creative and digital communications for organisations that want to move people and drive change.','Communications · Creative · Impact',false)}
 
   <section><div class="wrap split">
     <div class="rv"><h2>Your partner in strategic communications and creative impact</h2><br>
